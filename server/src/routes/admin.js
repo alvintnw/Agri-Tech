@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { authenticate, authorize } = require('../middleware/auth');
+const controller = require('../controllers/adminController');
+router.use(authenticate, authorize('admin'));
+router.get('/users', controller.users);
+router.put('/users/:id', controller.updateUser);
+router.get('/overview', controller.overview);
+router.get('/bookings', controller.bookings);
+router.put('/bookings/:id', require('../controllers/bookingController').update);
+module.exports = router;
